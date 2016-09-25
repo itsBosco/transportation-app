@@ -1,0 +1,22 @@
+body,
+html{
+    margin: 0;
+    padding: 0;
+    background-color: #303030;
+}
+
+nav{
+    height: 50px;
+    width: 100vw;
+    background-color: #212121;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    li{
+        list-style: none;
+        padding: 13px;
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+}

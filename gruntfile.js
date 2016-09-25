@@ -7,7 +7,7 @@ module.exports = function(grunt) {
             },
             target: {
                 files: {
-                    'app/dist/js/app.min.js': ['app/src/js/app.js', 'app/src/js/controllers/*.js', 'app/src/js/services/*.js']
+                    'dist/js/app.min.js': ['src/js/app.js', 'src/js/controllers/*.js', 'src/js/services/*.js']
                 }
             }
         }, //UGLIFY
@@ -17,7 +17,7 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'app/dist/css/style.min.css': 'app/src/scss/style.scss'
+                    'dist/css/style.min.css': 'src/scss/style.scss'
                 }
             }
         }, //SASS
@@ -26,11 +26,11 @@ module.exports = function(grunt) {
                 livereload: true
             },
             srcipts: {
-                files: ['app/src/js/app.js', 'app/src/js/controllers/*.js', 'app/src/js/services/*.js'],
+                files: ['src/js/app.js', 'src/js/controllers/*.js', 'src/js/services/*.js'],
                 tasks: ['uglify']
             },
             css: {
-                files: 'app/src/scss/style.scss',
+                files: 'src/scss/style.scss',
                 tasks: ['sass']
             }
         }, //WATCH
@@ -38,9 +38,9 @@ module.exports = function(grunt) {
             dev: {
                 bsFiles: {
                     src: [
-                        'app/dist/css/*.css',
+                        'dist/css/*.css',
                         '*.html',
-                        'app/dist/js/*.js'
+                        'dist/js/*.js'
                     ]
                 },
                 options: {
