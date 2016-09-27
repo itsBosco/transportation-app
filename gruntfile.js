@@ -7,7 +7,7 @@ module.exports = function(grunt) {
             },
             target: {
                 files: {
-                    'dist/js/app.min.js': ['src/js/app.js', 'src/js/controllers/*.js', 'src/js/services/*.js']
+                    'dist/js/app.min.js': ['src/js/*.js']
                 }
             }
         }, //UGLIFY
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
                 livereload: true
             },
             srcipts: {
-                files: ['src/js/app.js', 'src/js/controllers/*.js', 'src/js/services/*.js'],
+                files: ['src/js/*.js'],
                 tasks: ['uglify']
             },
             css: {

@@ -6,19 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="dist/css/skeleton.min.css">
     <link rel="stylesheet" href="dist/css/style.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
-<body>
+<body ng-app="TransportationApp" ng-controller="MainController">
+    <nav>
+        <ul>
+            <li><a href="#">MARTA</a></li>
+        </ul>
+    </nav>
+
     <main>
-        <nav>
-            <ul>
-                <li><a href="#">ATLANTA TRANSPORTATION</a></li>
-            </ul>
-        </nav>
+        <select>
+            <option selected>-- DEPARTURE STATION --</option>
+            <option ng-repeat="stopName in stopNames">{{stopName}}</option>
+        </select>
+        <select>
+            <option selected>-- ARRIVAL STATION --</option>
+            <option ng-repeat="stopName in stopNames">{{stopName}}</option>
+        </select>
     </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="dist/js/app.min.js"></script>
 </body>
 
 </html>
