@@ -21,13 +21,13 @@
 
     <main>
         <div class="selects">
-            <select ng-model="departureStation" ng-change="setDeparture()">
+            <select ng-model="departureStation" ng-change="setStopID(departure)">
                 <option value="">-- DEPARTURE STATION --</option>
                 <option ng-repeat="stop in stops">{{stop.stop_name}}</option>
             </select>
             <select ng-model="arrivalStation">
                 <option value="">-- ARRIVAL STATION --</option>
-                <option ng-repeat="stop in stops">{{stop.stop_name}}</option>
+                <option ng-repeat="arrivalStop in arrivalStations track by $index">{{arrivalStop}}</option>
             </select>
         </div>
 
