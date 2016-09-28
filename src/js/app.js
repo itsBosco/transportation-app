@@ -2,19 +2,25 @@ var app = angular.module('TransportationApp', []);
 
 
 app.controller('MainController', ['$scope', '$http', function($scope, $http) {
-    var stopNames = [];
+    var stops = [];
 
     function getStops() {
-        $http.get('dist/gtfs/stops.json').then(function(results) {
+        var tempID = "";
+        $http.get('dist/data/stops.json').then(function(results) {
             results.data.forEach(function(stop) {
-                stopNames.push(stop.stop_name);
+                if (tempID != stop.zone_id) {
+                    stops.push(stop);
+                    tempID = stop.zone_id;
+                }
             });
         });
     }
 
     getStops();
 
+    $scope.setDeparture = function() {
+        console.log($scope.departureStation);
+    };
 
-    $scope.stopNames = stopNames;
-    console.log($scope.stopNames);
+    $scope.stops = stops;
 }]);

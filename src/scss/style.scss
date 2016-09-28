@@ -13,26 +13,44 @@ html {
     background-color: $dark_grey;
     width: 100%;
     height: 100%;
+    color: $white;
 }
 
 nav {
     height: 50px;
     width: 100%;
     background-color: $black;
-    color: $white;
     box-shadow: 0 0 5px #000;
     ul{
-        margin: 0;
+        display: inline;
     }
     li {
         list-style: none;
-        padding: 13px;
-
+        display: inline;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 50px;
+        margin: 0 20px;
         a {
             text-decoration: none;
             color: inherit;
         }
     }
+}
+
+.selects{
+    margin: 0 200px;
+}
+
+main{
+   height: 300px;
+   width: 1000px;
+   position: absolute;
+   top:0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   margin: auto;
 }
 
 select{
@@ -43,4 +61,6 @@ select{
     padding: 20px;
     min-width: 260px;
     text-transform: uppercase;
+    display: inline;
+    margin: 0 10px;
 }
