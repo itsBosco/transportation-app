@@ -14,7 +14,7 @@
 <body ng-app="TransportationApp" ng-controller="MainController">
     <nav>
         <ul>
-            <li><a href="#">CALI TRANSPORTATION APP</a></li>
+            <li><a href="#">CALTRAIN APP</a></li>
             <li style="float: right"><a href="#"><i class="fa fa-github fa-3x"></i></a></li>
         </ul>
     </nav>
@@ -25,12 +25,17 @@
                 <option value="">-- DEPARTURE STATION --</option>
                 <option ng-repeat="stop in stops">{{stop.stop_name}}</option>
             </select>
-            <select ng-model="arrivalStation">
+            <select ng-model="arrivalStation" ng-change="setStopID('arrival')">
                 <option value="">-- ARRIVAL STATION --</option>
                 <option ng-repeat="arrivalStop in arrivalStations track by $index">{{arrivalStop}}</option>
             </select>
         </div>
+        {{currentTripID}}
 
+        <div class="trip-info">
+            <p>{{departTime}}</p>
+            <p>{{arrivalTime}}</p>
+        </div>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>

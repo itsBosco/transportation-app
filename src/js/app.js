@@ -33,6 +33,18 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
         $scope.stopTimes.forEach(function(stopTimeInfo) {
             if (stopTimeInfo.stop_id == stop_id && typeof(stopTimeInfo.trip_id) == 'number' && !stopLoop) {
                 getStopsForDeparture(stopTimeInfo.trip_id);
+                $scope.departTime = stopTimeInfo.departure_time;
+                stopLoop = true; //stops loop to only get one entry. may need to change this
+            }
+        });
+    }
+
+    //gets arrival station info
+    function getArrivalInfo(stop_id) {
+        var stopLoop = false;
+        $scope.stopTimes.forEach(function(stopTimeInfo) {
+            if (stopTimeInfo.stop_id == stop_id && typeof(stopTimeInfo.trip_id) == 'number' && !stopLoop) {
+                $scope.arrivalTime = stopTimeInfo.arrival_time;
                 stopLoop = true; //stops loop to only get one entry may need to change this
             }
         });
@@ -40,6 +52,7 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
 
     //sets available arrival stations based on selected departure station
     function getStopsForDeparture(trip_id) {
+        $scope.currentTripID = trip_id;
         $scope.arrivalStations = [];
         stopTimes.forEach(function(stopTimeInfo) {
             if (trip_id == stopTimeInfo.trip_id) {
@@ -61,8 +74,9 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
                     arrivalStopID = stop.stop_id;
                 }
             });
-            //TODO:getArrivalInfo(arrivalStopID);
+            getArrivalInfo(arrivalStopID);
         } else {
+            $scope.arrivalTime = "";
             var departureStopID;
             $scope.stops.forEach(function(stop) {
                 if (stop.stop_name == $scope.departureStation) {
