@@ -29,23 +29,25 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
 
     //uses the departure station stop_id to get stop_time info
     function getDepartInfo(stop_id) {
-        var stopLoop = false;
+        i = 0;
+        $scope.departTimes = [];
         $scope.stopTimes.forEach(function(stopTimeInfo) {
-            if (stopTimeInfo.stop_id == stop_id && typeof(stopTimeInfo.trip_id) == 'number' && !stopLoop) {
+            if (stopTimeInfo.stop_id == stop_id && typeof(stopTimeInfo.trip_id) == 'number' && i < 10) {
                 getStopsForDeparture(stopTimeInfo.trip_id);
-                $scope.departTime = stopTimeInfo.departure_time;
-                stopLoop = true; //stops loop to only get one entry. may need to change this
+                $scope.departTimes.push(stopTimeInfo.departure_time);
+                i++;
             }
         });
     }
 
     //gets arrival station info
     function getArrivalInfo(stop_id) {
-        var stopLoop = false;
+        i = 0;
+        $scope.arrivalTimes = [];
         $scope.stopTimes.forEach(function(stopTimeInfo) {
-            if (stopTimeInfo.stop_id == stop_id && typeof(stopTimeInfo.trip_id) == 'number' && !stopLoop) {
-                $scope.arrivalTime = stopTimeInfo.arrival_time;
-                stopLoop = true; //stops loop to only get one entry may need to change this
+            if (stopTimeInfo.stop_id == stop_id && typeof(stopTimeInfo.trip_id) == 'number' && i < $scope.departTimes.length) {
+                $scope.arrivalTimes.push(stopTimeInfo.arrival_time);
+                i++;
             }
         });
     }
@@ -76,6 +78,7 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
             });
             getArrivalInfo(arrivalStopID);
         } else {
+            $scope.arrivalTimes = [];
             $scope.arrivalTime = "";
             var departureStopID;
             $scope.stops.forEach(function(stop) {

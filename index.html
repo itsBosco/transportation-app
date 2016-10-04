@@ -30,12 +30,32 @@
                 <option ng-repeat="arrivalStop in arrivalStations track by $index">{{arrivalStop}}</option>
             </select>
         </div>
-        {{currentTripID}}
+
+        <table>
+            <thead>
+                <th><span class="station-time">DEPARTURE TIMES</span> <br> {{departureStation}}
+                </th>
+                <th><span class="station-time">ARRIVAL TIMES</span> <br> {{arrivalStation}}
+                </th>
+            </thead>
+            <tbody>
+                <!-- <tr ng-repeat="departTime in departTimes | orderBy: departTime">
+                    <td>{{departTime}}</td>
+                </tr>
+                <tr>
+                    <td>jj</td>
+                </tr> -->
+                <td><span ng-repeat="departTime in departTimes | orderBy: departTime">{{departTime}}<br></span></td>
+                <td><span ng-repeat="arrivalTime in arrivalTimes | orderBy: arrivalTime">{{arrivalTime}}<br></span></td>
+            </tbody>
+        </table>
+
+        <!-- {{currentTripID}}
 
         <div class="trip-info">
             <p>{{departTime}}</p>
             <p>{{arrivalTime}}</p>
-        </div>
+        </div> -->
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
