@@ -61,9 +61,23 @@ td{
 }
 .station-time{
     font-weight: 100;
-    min-width: 500px;
 }
 .section{
     text-align: center;
     margin: 0 auto;
+}
+
+
+@media (max-width: 523px){
+    select {
+        max-width: 100px;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 375px){
+    table{
+        display: block;
+        overflow: scroll;
+    }
 }
