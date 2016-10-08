@@ -60,5 +60,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browser-sync');
 
     //register tasks
-    grunt.registerTask('default', ['uglify', 'sass', 'browserSync', 'watch']);
+    grunt.registerTask('default', ['browserSync', 'watch']);
 };
