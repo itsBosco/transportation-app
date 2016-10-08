@@ -7,7 +7,8 @@ module.exports = function(grunt) {
             },
             target: {
                 files: {
-                    'dist/js/app.min.js': ['src/js/*.js']
+                    'dist/js/app.min.js': ['src/js/app.min.js'],
+                    'dist/js/sw.min.js': ['src/js/sw.js']
                 }
             }
         }, //UGLIFY

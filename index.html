@@ -47,6 +47,15 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="dist/js/app.min.js"></script>
+    <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('dist/js/sw.min.js').then(function() {
+                return navigator.serviceWorker.ready;
+            }).then(function(reg) {}).catch(function(error) {
+                console.log('Service Worker error :^(', error);
+            });
+        }
+    </script>
 </body>
 
 </html>
