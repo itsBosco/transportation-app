@@ -54,7 +54,10 @@ main{
 }
 td{
     vertical-align: top;
-    padding: 0 100px;
+    padding: 10px 100px;
+    span{
+        line-height: 50px;
+    }
 }
 .station-time{
     font-weight: 100;
