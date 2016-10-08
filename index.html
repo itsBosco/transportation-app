@@ -49,7 +49,7 @@
     <script src="dist/js/app.min.js"></script>
     <script type="text/javascript">
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('dist/js/sw.min.js').then(function() {
+            navigator.serviceWorker.register('sw.js').then(function() {
                 return navigator.serviceWorker.ready;
             }).then(function(reg) {}).catch(function(error) {
                 console.log('Service Worker error :^(', error);
