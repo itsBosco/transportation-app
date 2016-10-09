@@ -38,8 +38,8 @@
                 </th>
             </thead>
             <tbody>
-                <td><span ng-repeat="departTime in departTimes | orderBy: departTime">{{departTime}}<br></span></td>
-                <td><span ng-repeat="arrivalTime in arrivalTimes | orderBy: arrivalTime">{{arrivalTime}}<br></span></td>
+                <td><span ng-repeat="departTime in departTimes | orderBy: departTime">{{departTime | date:'hh:mm:ss'}}<br></span></td>
+                <td><span ng-repeat="arrivalTime in arrivalTimes | orderBy: arrivalTime">{{arrivalTime | date:'hh:mm:ss'}}<br></span></td>
             </tbody>
         </table>
     </main>
