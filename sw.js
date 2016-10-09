@@ -9,6 +9,7 @@ self.addEventListener('install', function(event) {
             '/dist/js/app.min.js',
             '/dist/data/stop_times.json',
             '/dist/data/stops.json',
+            '/dist/data/Full_Timetable.pdf'
         ]);
     });
 });
