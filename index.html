@@ -34,11 +34,13 @@
             <thead>
                 <th><span class="station-time">DEPARTURE TIMES</span> <br> {{departureStation}}
                 </th>
+                <th>DURATIONS</th>
                 <th><span class="station-time">ARRIVAL TIMES</span> <br> {{arrivalStation}}
                 </th>
             </thead>
             <tbody>
                 <td><span ng-repeat="departTime in departTimes | orderBy: departTime">{{departTime | date:'hh:mm:ss'}}<br></span></td>
+                <td><span ng-repeat="durationTime in durationTimes | orderBy: durationTime track by $index">{{durationTime}} mins <br></span></td>
                 <td><span ng-repeat="arrivalTime in arrivalTimes | orderBy: arrivalTime">{{arrivalTime | date:'hh:mm:ss'}}<br></span></td>
             </tbody>
         </table>

@@ -6,6 +6,7 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
     var stopTimes = [];
     $scope.arrivalTimes = [];
     $scope.departTimes = [];
+    $scope.durationTimes = [];
 
     //Gets stops from stops.json
     function getStops() {
@@ -66,6 +67,12 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
         }
     }
 
+    function getDurations() {
+        for (var i = 0; i < $scope.departTimes.length; i++) {
+            $scope.durationTimes.push(Math.round(($scope.arrivalTimes[i] - $scope.departTimes[i]) / 60000));
+        }
+    }
+
     //gets arrival station time info
     function getArrivalInfo(stop_id) {
         i = 0;
@@ -97,6 +104,8 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
     //sets departure/arrival stop_id based on selected name
     $scope.setStopID = function(position) {
         if (position == 'arrival') {
+            $scope.arrivalTimes = [];
+            $scope.durationTimes = [];
             var arrivalStopID;
             $scope.stops.forEach(function(stop) {
                 if (stop.stop_name == $scope.arrivalStation) {
@@ -104,9 +113,11 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
                 }
             });
             getArrivalInfo(arrivalStopID);
+            getDurations();
         } else {
+            $scope.departTimes = [];
             $scope.arrivalTimes = [];
-            $scope.arrivalTime = "";
+            $scope.durationTimes = [];
             var departureStopID;
             $scope.stops.forEach(function(stop) {
                 if (stop.stop_name == $scope.departureStation) {
