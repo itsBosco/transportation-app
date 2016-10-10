@@ -30,11 +30,11 @@
                 </select>
         </div>
 
-        <table class="section">
+        <table ng-hide="sameStationSelected" class="section">
             <thead>
                 <th><span class="station-time">DEPARTURE TIMES</span> <br> {{departureStation}}
                 </th>
-                <th>DURATIONS</th>
+                <th class="station-time">DURATIONS</th>
                 <th><span class="station-time">ARRIVAL TIMES</span> <br> {{arrivalStation}}
                 </th>
             </thead>
@@ -44,6 +44,8 @@
                 <td><span ng-repeat="arrivalTime in arrivalTimes | orderBy: arrivalTime">{{arrivalTime | date:'hh:mm:ss'}}<br></span></td>
             </tbody>
         </table>
+
+        <p ng-show="sameStationSelected" class="error">SAME ARRIVAL & DEPARTURE STATIONS SELECTED</p>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>

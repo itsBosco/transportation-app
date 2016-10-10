@@ -112,6 +112,11 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
                     arrivalStopID = stop.stop_id;
                 }
             });
+
+            if ($scope.arrivalStation === $scope.departureStation) {
+                $scope.sameStationSelected = true;
+            }
+
             getArrivalInfo(arrivalStopID);
             getDurations();
         } else {
