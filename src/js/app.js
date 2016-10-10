@@ -115,6 +115,8 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
 
             if ($scope.arrivalStation === $scope.departureStation) {
                 $scope.sameStationSelected = true;
+            } else {
+                $scope.sameStationSelected = false;
             }
 
             getArrivalInfo(arrivalStopID);

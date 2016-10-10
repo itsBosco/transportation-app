@@ -74,14 +74,19 @@ td{
 
 @media (max-width: 523px){
     select {
-        max-width: 100px;
+        max-width: 200px;
         min-width: 100px;
     }
 }
-
-@media (max-width: 375px){
-    table{
-        display: block;
-        overflow: scroll;
+@media (max-width: 425px){
+    select{
+        max-width: 150px;
     }
+}
+
+@media (max-width: 600px){
+    table {
+		overflow-x: auto;
+		display: block;
+	}
 }
