@@ -8,6 +8,14 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
     $scope.departTimes = [];
     $scope.durationTimes = [];
 
+    function setDefaultStops() {
+        $scope.departureStation = 'BAYSHORE STATION';
+        $scope.arrivalStation = 'SAN FRANCISCO STATION';
+        getDepartInfo(70031);
+        getArrivalInfo(70011);
+        getDurations();
+    }
+
     //Gets stops from stops.json
     function getStops() {
         var tempID = "";
@@ -27,6 +35,7 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
             results.data.forEach(function(stopTimeInfo) {
                 stopTimes.push(stopTimeInfo);
             });
+            setDefaultStops();
         });
     }
 
