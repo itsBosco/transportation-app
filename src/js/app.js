@@ -78,7 +78,13 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
 
     function getDurations() {
         for (var i = 0; i < $scope.departTimes.length; i++) {
-            $scope.durationTimes.push(Math.round(($scope.arrivalTimes[i] - $scope.departTimes[i]) / 60000));
+            if (($scope.arrivalTimes[i] - $scope.departTimes[i]) < 0) {
+                $scope.invalidSequence = true;
+            } else {
+                $scope.invalidSequence = false;
+                $scope.durationTimes.push(Math.round(($scope.arrivalTimes[i] - $scope.departTimes[i]) / 60000));
+            }
+
         }
     }
 

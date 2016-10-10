@@ -30,7 +30,7 @@
                 </select>
         </div>
 
-        <table ng-hide="sameStationSelected" class="section">
+        <table ng-hide="sameStationSelected || invalidSequence" class="section">
             <thead>
                 <th><span class="station-time">DEPARTURE TIMES</span> <br> {{departureStation}}
                 </th>
@@ -46,6 +46,7 @@
         </table>
 
         <p ng-show="sameStationSelected" class="error">SAME ARRIVAL & DEPARTURE STATIONS SELECTED</p>
+        <p ng-show="invalidSequence" class="error">SELECTED ARRIVAL STATION IS AFTER DEPARTURE STATION</p>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
