@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Transportation App</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="dist/css/style.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
@@ -15,7 +14,7 @@
     <nav>
         <ul>
             <li><a href="#">CALTRAIN APP</a></li>
-            <li style="float: right"><a href="#"><i class="fa fa-github fa-3x"></i></a></li>
+            <li style="float: right"><a href="dist/data/Full_Timetable.pdf">TIMETABLE</a></li>
         </ul>
     </nav>
 
@@ -31,25 +30,30 @@
                 </select>
         </div>
 
-        <table class="section">
+        <table ng-hide="sameStationSelected || invalidSequence" class="section">
             <thead>
                 <th><span class="station-time">DEPARTURE TIMES</span> <br> {{departureStation}}
                 </th>
+                <th class="station-time">DURATIONS</th>
                 <th><span class="station-time">ARRIVAL TIMES</span> <br> {{arrivalStation}}
                 </th>
             </thead>
             <tbody>
-                <td><span ng-repeat="departTime in departTimes | orderBy: departTime">{{departTime}}<br></span></td>
-                <td><span ng-repeat="arrivalTime in arrivalTimes | orderBy: arrivalTime">{{arrivalTime}}<br></span></td>
+                <td><span ng-repeat="departTime in departTimes | orderBy: departTime">{{departTime | date:'hh:mm:ss'}}<br></span></td>
+                <td><span ng-repeat="durationTime in durationTimes | orderBy: durationTime track by $index">{{durationTime}} mins <br></span></td>
+                <td><span ng-repeat="arrivalTime in arrivalTimes | orderBy: arrivalTime">{{arrivalTime | date:'hh:mm:ss'}}<br></span></td>
             </tbody>
         </table>
+
+        <p ng-show="sameStationSelected" class="error">SAME ARRIVAL & DEPARTURE STATIONS SELECTED</p>
+        <p ng-show="invalidSequence" class="error">SELECTED ARRIVAL STATION IS AFTER DEPARTURE STATION</p>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="dist/js/app.min.js"></script>
     <script type="text/javascript">
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('dist/js/sw.min.js').then(function() {
+            navigator.serviceWorker.register('sw.js').then(function() {
                 return navigator.serviceWorker.ready;
             }).then(function(reg) {}).catch(function(error) {
                 console.log('Service Worker error :^(', error);

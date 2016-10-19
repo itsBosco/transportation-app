@@ -54,13 +54,39 @@ main{
 }
 td{
     vertical-align: top;
-    padding: 0 100px;
+    padding: 10px 100px;
+    span{
+        line-height: 50px;
+    }
 }
 .station-time{
     font-weight: 100;
-    min-width: 500px;
 }
 .section{
     text-align: center;
     margin: 0 auto;
+}
+
+.error{
+    text-align:center;
+    color:#D32F2F;
+}
+
+@media (max-width: 523px){
+    select {
+        max-width: 200px;
+        min-width: 100px;
+    }
+}
+@media (max-width: 425px){
+    select{
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 600px){
+    table {
+		overflow-x: auto;
+		display: block;
+	}
 }

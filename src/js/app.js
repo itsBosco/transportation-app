@@ -4,6 +4,17 @@ var app = angular.module('TransportationApp', []);
 app.controller('MainController', ['$scope', '$http', function($scope, $http) {
     var stops = [];
     var stopTimes = [];
+    $scope.arrivalTimes = [];
+    $scope.departTimes = [];
+    $scope.durationTimes = [];
+
+    function setDefaultStops() {
+        $scope.departureStation = 'BAYSHORE STATION';
+        $scope.arrivalStation = 'SAN FRANCISCO STATION';
+        getDepartInfo(70031);
+        getArrivalInfo(70011);
+        getDurations();
+    }
 
     //Gets stops from stops.json
     function getStops() {
@@ -24,32 +35,70 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
             results.data.forEach(function(stopTimeInfo) {
                 stopTimes.push(stopTimeInfo);
             });
+            setDefaultStops();
         });
     }
 
     //uses the departure station stop_id to get stop_time info
     function getDepartInfo(stop_id) {
         i = 0;
-        $scope.departTimes = [];
+        var departTimes = [];
         $scope.stopTimes.forEach(function(stopTimeInfo) {
             if (stopTimeInfo.stop_id == stop_id && typeof(stopTimeInfo.trip_id) == 'number' && i < 10) {
                 getStopsForDeparture(stopTimeInfo.trip_id);
-                $scope.departTimes.push(stopTimeInfo.departure_time);
+                departTimes.push(stopTimeInfo.departure_time);
                 i++;
             }
         });
+        convertTime(departTimes, 'departure');
     }
 
-    //gets arrival station info
+    //converts strings into date objects
+    function convertTime(times, status) {
+        if (status == "arrival") {
+            times.forEach(function(arrivalTime) {
+                time = arrivalTime.split(':');
+                d = new Date();
+                d.setHours(+time[0]);
+                d.setMinutes(time[1]);
+                d.setSeconds(time[2]);
+                $scope.arrivalTimes.push(d);
+            });
+        } else {
+            times.forEach(function(departTime) {
+                time = departTime.split(':');
+                d = new Date();
+                d.setHours(+time[0]);
+                d.setMinutes(time[1]);
+                d.setSeconds(time[2]);
+                $scope.departTimes.push(d);
+            });
+        }
+    }
+
+    function getDurations() {
+        for (var i = 0; i < $scope.departTimes.length; i++) {
+            if (($scope.arrivalTimes[i] - $scope.departTimes[i]) < 0) {
+                $scope.invalidSequence = true;
+            } else {
+                $scope.invalidSequence = false;
+                $scope.durationTimes.push(Math.round(($scope.arrivalTimes[i] - $scope.departTimes[i]) / 60000));
+            }
+
+        }
+    }
+
+    //gets arrival station time info
     function getArrivalInfo(stop_id) {
         i = 0;
-        $scope.arrivalTimes = [];
+        var arrivalTimes = [];
         $scope.stopTimes.forEach(function(stopTimeInfo) {
             if (stopTimeInfo.stop_id == stop_id && typeof(stopTimeInfo.trip_id) == 'number' && i < $scope.departTimes.length) {
-                $scope.arrivalTimes.push(stopTimeInfo.arrival_time);
+                arrivalTimes.push(stopTimeInfo.arrival_time);
                 i++;
             }
         });
+        convertTime(arrivalTimes, 'arrival');
     }
 
     //sets available arrival stations based on selected departure station
@@ -70,16 +119,27 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
     //sets departure/arrival stop_id based on selected name
     $scope.setStopID = function(position) {
         if (position == 'arrival') {
+            $scope.arrivalTimes = [];
+            $scope.durationTimes = [];
             var arrivalStopID;
             $scope.stops.forEach(function(stop) {
                 if (stop.stop_name == $scope.arrivalStation) {
                     arrivalStopID = stop.stop_id;
                 }
             });
+
+            if ($scope.arrivalStation === $scope.departureStation) {
+                $scope.sameStationSelected = true;
+            } else {
+                $scope.sameStationSelected = false;
+            }
+
             getArrivalInfo(arrivalStopID);
+            getDurations();
         } else {
+            $scope.departTimes = [];
             $scope.arrivalTimes = [];
-            $scope.arrivalTime = "";
+            $scope.durationTimes = [];
             var departureStopID;
             $scope.stops.forEach(function(stop) {
                 if (stop.stop_name == $scope.departureStation) {
@@ -89,6 +149,7 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
             getDepartInfo(departureStopID);
         }
     };
+
 
     $scope.stops = stops;
     $scope.stopTimes = stopTimes;
