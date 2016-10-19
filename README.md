@@ -3,7 +3,7 @@
 Project built to practice building offline first web apps.
 
 ## Live Demo
-TODO
+https://itsbosco.github.io/transportation-app/
 
 ## Install and run locally
 + Install [nodejs](https://nodejs.org/en/) and npm if needed
